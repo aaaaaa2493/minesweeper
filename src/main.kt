@@ -5,11 +5,14 @@ fun main(args: Array<String>) {
     val fieldSizeX = 9
     val fieldSizeY = 9
 
+    val emptyCell = '.'
+    val mineCell = 'X'
+
     print("How many mines do you want on the field? ")
     val scanner = Scanner(System.`in`)
     val pointsCount = scanner.nextInt()
 
-    val field = CharArray(fieldSizeX * fieldSizeY) {'.'}
+    val field = CharArray(fieldSizeX * fieldSizeY) {emptyCell}
 
     val random = Random()
     var points = 0
@@ -18,15 +21,15 @@ fun main(args: Array<String>) {
         val x = random.nextInt(fieldSizeX)
         val y = random.nextInt(fieldSizeY)
 
-        if (field[x * fieldSizeY + y] == '.') {
-            field[x * fieldSizeY + y] = 'X'
+        if (field[x * fieldSizeY + y] == emptyCell) {
+            field[x * fieldSizeY + y] = mineCell
             points++
         }
 
     }
 
     for ((index, value) in field.withIndex()) {
-        if (value == '.') {
+        if (value == emptyCell) {
             var minesAround = 0
 
             val x = index / fieldSizeY
@@ -37,7 +40,7 @@ fun main(args: Array<String>) {
                     val newY = y + dy
                     if (newX in 0 until fieldSizeX &&
                         newY in 0 until fieldSizeY &&
-                            field[newX * fieldSizeY + newY] == 'X') {
+                            field[newX * fieldSizeY + newY] == mineCell) {
                         minesAround++
                     }
                 }
