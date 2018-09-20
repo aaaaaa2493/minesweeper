@@ -4,7 +4,10 @@ fun main(args: Array<String>) {
 
     val fieldSizeX = 9
     val fieldSizeY = 9
-    val pointsCount = 10
+
+    print("How many mines do you want on the field? ")
+    val scanner = Scanner(System.`in`)
+    val pointsCount = scanner.nextInt()
 
     val field = CharArray(fieldSizeX * fieldSizeY) {'.'}
 
@@ -23,7 +26,7 @@ fun main(args: Array<String>) {
     }
 
     for ((index, value) in field.withIndex()) {
-        if (index % fieldSizeY == 0 && index != 0) {
+        if (index % fieldSizeY == 0) {
             println()
         }
 
